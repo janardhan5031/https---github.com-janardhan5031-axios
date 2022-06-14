@@ -31,7 +31,14 @@ function addTodo() {              //to post the data into the server
 
 // PUT/PATCH REQUEST
 function updateTodo() {
-  console.log('PUT/PATCH Request');
+  //console.log('PUT/PATCH Request');
+  axios.put('https://jsonplaceholder.typicode.com/todos/1',{
+  title:'jani',
+  completed:false
+  }).then(res=>showOutput(res))
+  .catch(err=>console.log(err));
+
+
 }
 
 // DELETE REQUEST
