@@ -19,13 +19,9 @@ function getTodos() {
 // POST REQUEST
 function addTodo() {              //to post the data into the server
   //console.log('POST Request');
-  axios({
-    method:'post',
-    url:'https://jsonplaceholder.typicode.com/todos?_limit=5',
-    data:{
-      title:'jani',
-      completed:true
-    }
+  axios.post('https://jsonplaceholder.typicode.com/todos?_limit=5',{
+  title:'jani',
+  completed:false
   }).then(res=>showOutput(res))
     .catch(err=>console.log(err));
 
