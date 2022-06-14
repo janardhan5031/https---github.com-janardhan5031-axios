@@ -1,11 +1,6 @@
 // GET REQUEST
 function getTodos() {
-  //console.log('GET Request');
-  axios({
-    url:'https://jsonplaceholder.typicode.com/todos'
-  })
-    .then(res=>showOutput(res))
-    .catch(err=>console.error(err));
+  console.log('GET Request');
 }
 
 // POST REQUEST
@@ -17,7 +12,6 @@ function addTodo() {
 function updateTodo() {
   console.log('PUT/PATCH Request');
 }
-
 // DELETE REQUEST
 function removeTodo() {
   console.log('DELETE Request');
