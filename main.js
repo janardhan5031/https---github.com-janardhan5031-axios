@@ -9,15 +9,28 @@ function getTodos() {
   //}).then(res=>showOutput(res))
   //  .catch(err=>console.log(err));
 
-  axios.get('https://jsonplaceholder.typicode.com/todos?_limit=5')
+  axios
+    .get('https://jsonplaceholder.typicode.com/todos?_limit=5')
     .then(res=>showOutput(res))
     .catch(err=>console.log(err));
 
 }
 
 // POST REQUEST
-function addTodo() {
-  console.log('POST Request');
+function addTodo() {              //to post the data into the server
+  //console.log('POST Request');
+  axios({
+    method:'post',
+    url:'https://jsonplaceholder.typicode.com/todos?_limit=5',
+    data:{
+      title:'jani',
+      completed:true
+    }
+  }).then(res=>showOutput(res))
+    .catch(err=>console.log(err));
+
+
+
 }
 
 // PUT/PATCH REQUEST
