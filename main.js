@@ -32,11 +32,17 @@ function addTodo() {              //to post the data into the server
 // PUT/PATCH REQUEST
 function updateTodo() {
   //console.log('PUT/PATCH Request');
-  axios.put('https://jsonplaceholder.typicode.com/todos/1',{
+  //axios.patch('https://jsonplaceholder.typicode.com/todos/1',{
+  //title:'jani',
+  //completed:false
+  //}).then(res=>showOutput(res))
+  //.catch(err=>console.log(err));
+
+  axios.patch('https://jsonplaceholder.typicode.com/todos/1',{
   title:'jani',
   completed:false
-  }).then(res=>showOutput(res))
-  .catch(err=>console.log(err));
+}).then(res=>showOutput(res))
+.catch(err=>console.log(err));
 
 
 }
