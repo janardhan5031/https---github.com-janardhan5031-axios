@@ -58,17 +58,26 @@ function removeTodo() {
 // SIMULTANEOUS DATA
 function getData() {
   //console.log('Simultaneous Request');
-  axios.all([
-    axios.get('https://jsonplaceholder.typicode.com/todos?_limit=5'),
-    axios.get('https://jsonplaceholder.typicode.com/posts?_limit=5')
+  //axios.all([               //this method is used to do the multiple requests at a time
+  //  axios.get('https://jsonplaceholder.typicode.com/todos?_limit=5'),
+  //  axios.get('https://jsonplaceholder.typicode.com/posts?_limit=5')
+  //])
+  //  .then((res)=>{
+  //    console.log(res[0]);
+  //    console.log(res[1]);
+  //    //showOutput(res[0]);
+  //    showOutput(res[1]);
+  //  })
+  //  .catch(err=>console.log(err));
+
+  axios.all([               //this method is used to do the multiple requests at a time
+  axios.get('https://jsonplaceholder.typicode.com/todos?_limit=5'),
+  axios.get('https://jsonplaceholder.typicode.com/posts?_limit=5')
   ])
-    .then((res)=>{
-      console.log(res[0]);
-      console.log(res[1]);
-      //showOutput(res[0]);
-      showOutput(res[1]);
-    })
-    .catch(err=>console.log(err));
+  .then(axios.spread((todos,posts) => {showOutput(posts)}))
+  .catch(err=>console.log(err));
+
+
 }
 
 // CUSTOM HEADERS
