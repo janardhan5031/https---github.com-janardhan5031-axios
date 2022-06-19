@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sign up</title>
+    <style>
+        .head{
+            border:1px solid rgb(59, 248, 185);
+            background-color: aqua;
+            margin: 0px 20px;
+        }
+        #header{
+            text-align: center;
+        }
+        .form-outer{
+            border: 1px solid black;
+            margin: 10px 35px;
+            padding: 10px 20px;
+            background-color: rgb(240, 240, 240);
+        }
+        input{
+            width: 350px;
+        }
+        .new_div_class{
+            border: 1px solid lightpink;
+            background-color: lightcyan;
+        }
+        .list{
+            border: 1px solid none;
+            padding: 8px;
+            
+        }
+        #dlt_btn{
+            position: absolute;
+            left: 350px;
+            color: red;
+            border-radius: 50%;
+            border-color: rgb(245, 98, 98);
+        }
+
+
+    </style>
+</head>
+<body id="body">
+    <div class="head">
+        <h1 id="header"> Appointment form</h1>
+    </div>
+    <div class="form-outer">
+        <div class="form-inner">
+            <form class="form">
+                <label for="fname">First name:</label><br>
+                <input type="text" id="fname" value=""><br>
+                <label type="text" for="lname">Last name</label><br>
+                <input type="text" id="lname" value=""><br>
+                <label for="mail">Email</label><br>
+                <input type="text" id="mail" value=""><br><br>
+                <center><input type="submit" value="submit" calass='submit' id=submit style="width: 70px" style="text-align: center"></center>            
+            </form>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"></script>
+    <script src="server storage.js"></script>
+</body>
+</html>
