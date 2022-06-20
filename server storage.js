@@ -19,19 +19,30 @@ submit.addEventListener('click',(e)=>{
 
     // storing the data in server
     axios.post('https://crudcrud.com/api/438dcc9242444033be3322dea897279b/appointements',myobj)
-        .then((res)=>{console.log(res.data.fname)})
+        .then((res)=>{console.log(res.data.fname)
+        
+            //displaydata
+            axios.get('https://crudcrud.com/api/438dcc9242444033be3322dea897279b/appointements')
+                .then((res)=>{
+                    let name=res.data[res.data.length-1].fname;
+                    let id=res.data[res.data.length-1]._id;
+                    console.log(name,id);
+                    Elements(name,id);
+                })
+                .catch((err)=>{console.log(err)})
+        
+        })
         .catch(err=>{console.log(err)})
 
         
-    //displaydata
-    axios.get('https://crudcrud.com/api/438dcc9242444033be3322dea897279b/appointements')
-        .then((res)=>{
-            let name=res.data[res.data.length-1].fname;
-            let id=res.data[res.data.length-1]._id;
-            console.log(name,id);
-            Elements(name,id);
-        })
-        .catch((err)=>{console.log(err)})
+    //axios.get('https://crudcrud.com/api/438dcc9242444033be3322dea897279b/appointements')
+    //    .then((res)=>{
+    //        let name=res.data[res.data.length-1].fname;
+    //        let id=res.data[res.data.length-1]._id;
+    //        console.log(name,id);
+    //        Elements(name,id);
+    //    })
+    //    .catch((err)=>{console.log(err)})
 
 });
 
