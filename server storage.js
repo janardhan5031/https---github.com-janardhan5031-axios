@@ -46,7 +46,7 @@ function Elements(data){
     `<ul>
         <li class="list">${data}<button id="dlt_btn">X</button>
         </li>
-    </ul>`
+    </ul>`  
 
     new_div.innerHTML+=ele;
 }
