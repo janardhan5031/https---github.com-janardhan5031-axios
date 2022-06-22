@@ -18,11 +18,11 @@ function addData(e){
     }
 
     // storing the data in server
-    axios.post('https://crudcrud.com/api/e14acf7d59764f7fbe5354acf8b3b718/appointements',myobj)
+    axios.post('https://crudcrud.com/api/2a5e02ccaa1a4b70900fd59b0ac24189/appointements',myobj)
         .then((res)=>{console.log('submited')
 
          //displaying the data
-            axios.get('https://crudcrud.com/api/e14acf7d59764f7fbe5354acf8b3b718/appointements')
+            axios.get('https://crudcrud.com/api/2a5e02ccaa1a4b70900fd59b0ac24189/appointements')
             .then((res)=>{
                 let name=res.data[res.data.length-1].fname;
                 let id=res.data[res.data.length-1]._id;
@@ -38,6 +38,7 @@ function addData(e){
 
 
 function Elements(fname,_id){
+    console.log(fname,_id);
 
     let list=document.getElementById('list_of_users');
     //console.log(list);
@@ -51,7 +52,7 @@ function Elements(fname,_id){
 }   
 
 //displaying the data from servert into page
-axios.get('https://crudcrud.com/api/e14acf7d59764f7fbe5354acf8b3b718/appointements')
+axios.get('https://crudcrud.com/api/2a5e02ccaa1a4b70900fd59b0ac24189/appointements')
     .then((res)=>{
         res.data.forEach(element => {
             if(element.fname)
@@ -64,7 +65,7 @@ axios.get('https://crudcrud.com/api/e14acf7d59764f7fbe5354acf8b3b718/appointemen
 
 //deleting the data from the server
 function deleteUser(_id){
-    axios.delete(`https://crudcrud.com/api/e14acf7d59764f7fbe5354acf8b3b718/appointements/${_id}`)
+    axios.delete(`https://crudcrud.com/api/2a5e02ccaa1a4b70900fd59b0ac24189/appointements/${_id}`)
     .then((res)=>{
         console.log('deleted successfully');
         deleteFromPage(_id);
@@ -84,29 +85,34 @@ function deleteFromPage(_id) {
 //edit user details
 function EditUserDetails(_id){
     //calling the server for data with id
-    axios.get(`https://crudcrud.com/api/e14acf7d59764f7fbe5354acf8b3b718/appointements/${_id}`)
+    axios.get(`https://crudcrud.com/api/2a5e02ccaa1a4b70900fd59b0ac24189/appointements/${_id}`)
         .then((res) => {
             var name=res.data.fname;
 
             // displaying the data from server in form fields
             document.getElementById('fname').value=name;
-            deleteUser(_id);
-            //window.addEventListener('onclick',(e)=>{
-            //    e.preventDefault();
-            //    //getting all data from from
-            //    var fname=document.getElementById('fname').value;   // first name
-            //    var lname=document.getElementById('lname').value;   // last name
-            //    var mail=document.getElementById('mail').value   // mail address
-            //    //converting data into object
-            //    let myobj={
-            //        fname: fname,
-            //        lname: lname,
-            //        mail: mail
-            //    }
-            //    axios.patch(`https://crudcrud.com/api/e14acf7d59764f7fbe5354acf8b3b718/appointements/${_id}`,myobj)
-            //        .then((res) => console.log(res))
-            //        .catch(err=>console.log(err));
-            //})
+            //deleteUser(_id);
+            let edit=document.getElementById('submit');
+
+            edit.addEventListener('click',(e)=>{
+                e.preventDefault();
+                //getting all data from from
+                var fname=document.getElementById('fname').value;   // first name
+                var lname=document.getElementById('lname').value;   // last name
+                var mail=document.getElementById('mail').value   // mail address
+                //converting data into object
+                let myobj={
+                    fname: fname,
+                    lname: lname,
+                    mail: mail
+                }
+                axios.put(`https://crudcrud.com/api/2a5e02ccaa1a4b70900fd59b0ac24189/appointements/${_id}`,myobj)
+                    .then((res) =>{ console.log('updated the data')
+                    deleteFromPage(_id);
+                    Elements(fname,_id);
+                    })
+                    .catch(err=>console.log(err));
+            })
         })
         .catch((err) => console.log(err));
     //axios ended here
