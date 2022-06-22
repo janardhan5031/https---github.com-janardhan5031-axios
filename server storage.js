@@ -1,7 +1,7 @@
 
 var submit=document.getElementById('submit');
 
-submit.addEventListener('click',(e)=>{
+function addData(e){
     e.preventDefault();
     //console.log('click');
 
@@ -18,11 +18,11 @@ submit.addEventListener('click',(e)=>{
     }
 
     // storing the data in server
-    axios.post('https://crudcrud.com/api/c35b84f121b8450ea88624fe61700a2e/appointements',myobj)
+    axios.post('https://crudcrud.com/api/e14acf7d59764f7fbe5354acf8b3b718/appointements',myobj)
         .then((res)=>{console.log('submited')
 
          //displaying the data
-            axios.get('https://crudcrud.com/api/c35b84f121b8450ea88624fe61700a2e/appointements')
+            axios.get('https://crudcrud.com/api/e14acf7d59764f7fbe5354acf8b3b718/appointements')
             .then((res)=>{
                 let name=res.data[res.data.length-1].fname;
                 let id=res.data[res.data.length-1]._id;
@@ -34,7 +34,7 @@ submit.addEventListener('click',(e)=>{
         .catch(err=>{console.log(err)})
     
 
-});
+}
 
 
 function Elements(fname,_id){
@@ -51,7 +51,7 @@ function Elements(fname,_id){
 }   
 
 //displaying the data from servert into page
-axios.get('https://crudcrud.com/api/c35b84f121b8450ea88624fe61700a2e/appointements')
+axios.get('https://crudcrud.com/api/e14acf7d59764f7fbe5354acf8b3b718/appointements')
     .then((res)=>{
         res.data.forEach(element => {
             if(element.fname)
@@ -64,7 +64,7 @@ axios.get('https://crudcrud.com/api/c35b84f121b8450ea88624fe61700a2e/appointemen
 
 //deleting the data from the server
 function deleteUser(_id){
-    axios.delete(`https://crudcrud.com/api/c35b84f121b8450ea88624fe61700a2e/appointements/${_id}`)
+    axios.delete(`https://crudcrud.com/api/e14acf7d59764f7fbe5354acf8b3b718/appointements/${_id}`)
     .then((res)=>{
         console.log('deleted successfully');
         deleteFromPage(_id);
@@ -82,24 +82,37 @@ function deleteFromPage(_id) {
 }
 
 //edit user details
-//function EditUserDetails(_id){
-//    //getting all data from from
-//    var fname=document.getElementById('fname').value;   // first name
-//    var lname=document.getElementById('lname').value;   // last name
-//    var mail=document.getElementById('mail').value   // mail address
-//    //converting data into object
-//    let myobj={
-//        fname: fname,
-//        lname: lname,
-//        mail: mail
-//    }
-//
-//    axios.patch(`https://crudcrud.com/api/c35b84f121b8450ea88624fe61700a2e/appointements/${_id}`,myobj)
-//        .then((res) => console.log(res))
-//        .catch(err=>console.log(err));
-//
-//}
-//
+function EditUserDetails(_id){
+    //calling the server for data with id
+    axios.get(`https://crudcrud.com/api/e14acf7d59764f7fbe5354acf8b3b718/appointements/${_id}`)
+        .then((res) => {
+            var name=res.data.fname;
+
+            // displaying the data from server in form fields
+            document.getElementById('fname').value=name;
+            deleteUser(_id);
+            //window.addEventListener('onclick',(e)=>{
+            //    e.preventDefault();
+            //    //getting all data from from
+            //    var fname=document.getElementById('fname').value;   // first name
+            //    var lname=document.getElementById('lname').value;   // last name
+            //    var mail=document.getElementById('mail').value   // mail address
+            //    //converting data into object
+            //    let myobj={
+            //        fname: fname,
+            //        lname: lname,
+            //        mail: mail
+            //    }
+            //    axios.patch(`https://crudcrud.com/api/e14acf7d59764f7fbe5354acf8b3b718/appointements/${_id}`,myobj)
+            //        .then((res) => console.log(res))
+            //        .catch(err=>console.log(err));
+            //})
+        })
+        .catch((err) => console.log(err));
+    //axios ended here
+
+}
+
 
 
 
