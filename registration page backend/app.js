@@ -16,9 +16,8 @@ app.set('views','views');
 
 app.use(cors());
 
-app.use(express.json());
 
-app.use(bodyParser.urlencoded({extended:false}));   //to parse data form req url
+app.use(bodyParser.json());   //to parse data form req url
 
 app.get('/get-data',userdata.getAllUsers);
 app.post('/post_data',userdata.postUsers);    //posting user details

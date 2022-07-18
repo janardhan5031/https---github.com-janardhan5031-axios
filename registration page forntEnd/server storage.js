@@ -18,7 +18,7 @@ function addData(e){
     }
     //console.log(myobj);
     // storing the data in server
-    axios.post(`http://localhost:5000/post_data`,myobj)
+    axios.post(`http://localhost:5000/post_data/:myobj`,myobj)
         .then((res)=>{console.log('submited')
             console.log(res);
 
