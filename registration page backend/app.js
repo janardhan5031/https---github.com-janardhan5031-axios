@@ -17,10 +17,13 @@ app.set('views','views');
 app.use(cors());
 
 
-app.use(bodyParser.json());   //to parse data form req url
+app.use(bodyParser.json());   //to parse data form req url into json formate
 
 app.get('/get-data',userdata.getAllUsers);
+app.get('/get-singleData/:userId',userdata.getSingleData);
 app.post('/post_data',userdata.postUsers);    //posting user details
+app.post('/post-edit-data',userdata.updateData);  //updating user details
+app.get('/delete-user-data/:userId',userdata.deleteData);  //deleting user details
 
 
 sequelize.sync()

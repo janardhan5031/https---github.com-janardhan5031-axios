@@ -18,7 +18,7 @@ function addData(e){
     }
     //console.log(myobj);
     // storing the data in server
-    axios.post(`http://localhost:5000/post_data/:myobj`,myobj)
+    axios.post(`http://localhost:5000/post_data`,myobj)
         .then((res)=>{console.log('submited')
             console.log(res);
 
@@ -39,7 +39,7 @@ function addData(e){
 
 
 function Elements(fname,_id){
-    console.log(fname,_id);
+    //console.log(fname,_id);
 
     let list=document.getElementById('list_of_users');
     //console.log(list);
@@ -52,10 +52,10 @@ function Elements(fname,_id){
     
 }   
 
-//isplaying the data from servert into page
+//displaying the data from servert into page
 axios.get('http://localhost:5000/get-data')
    .then((res)=>{
-        //console.log(res);
+        console.log(res.data);
        res.data.forEach(element => {
            if(element.name)
            {Elements(element.name,element.id);}
@@ -64,10 +64,9 @@ axios.get('http://localhost:5000/get-data')
    .catch((err)=>{console.log(err)});
 //
 //
-
-/*deleting the data from the server
+//deleting the data from the server
 function deleteUser(_id){
-    axios.delete(`https://crudcrud.com/api/db79e5d2890b4ac6ba25ba1be2653dba/appointements/${_id}`)
+    axios.get(`http://localhost:5000/delete-user-data/${_id}`)
     .then((res)=>{
         console.log('deleted successfully');
         deleteFromPage(_id);
@@ -75,8 +74,10 @@ function deleteUser(_id){
     .catch(err=>console.log(err));
 }
 
+
 //delete data from page
 function deleteFromPage(_id) {
+    console.log(_id);
     let ele=document.getElementById(_id);
     let parentnode=document.getElementById('list_of_users');
     if(ele){
@@ -87,28 +88,32 @@ function deleteFromPage(_id) {
 //edit user details
 function EditUserDetails(_id){
     //calling the server for data with id
-    axios.get(`https://crudcrud.com/api/db79e5d2890b4ac6ba25ba1be2653dba/appointements/${_id}`)
+    axios.get(`http://localhost:5000/get-singleData/${_id}`)
         .then((res) => {
-            var name=res.data.fname;
+            console.log(res.data);
+            const name=res.data.name;
+            const email=res.data.email;
 
             // displaying the data from server in form fields
-            document.getElementById('fname').value=name;
+            document.getElementById('name').value=name;
+            document.getElementById('email').value=email;
             //deleteUser(_id);
-            let edit=document.getElementById('submit');
+            const edit=document.getElementById('submit');
 
             edit.addEventListener('click',(e)=>{
                 e.preventDefault();
                 //getting all data from from
-                var fname=document.getElementById('fname').value;   // first name
-                var lname=document.getElementById('lname').value;   // last name
-                var mail=document.getElementById('mail').value   // mail address
+                const fname=document.getElementById('name').value;   // first name
+                const lname=document.getElementById('lname').value;   // last name
+                const mail=document.getElementById('email').value   // mail address
                 //converting data into object
                 let myobj={
-                    fname: fname,
+                    id:_id,
+                    name: fname,
                     lname: lname,
-                    mail: mail
+                    email: mail
                 }
-                axios.put(`https://crudcrud.com/api/db79e5d2890b4ac6ba25ba1be2653dba/appointements/${_id}`,myobj)
+                axios.post(`http://localhost:5000/post-edit-data`,myobj)
                     .then((res) =>{ console.log('updated the data')
                     deleteFromPage(_id);
                     Elements(fname,_id);
@@ -120,4 +125,4 @@ function EditUserDetails(_id){
     //axios ended here
 
 }
-*/
+
