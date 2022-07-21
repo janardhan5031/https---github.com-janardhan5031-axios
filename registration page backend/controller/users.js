@@ -58,7 +58,7 @@ exports.updateData = (req,res,next)=>{
 exports.deleteData =(req,res,next) =>{
     //accessing id from request
     const userid= req.params.userId;
-    //console.log(userid);
+    //  2console.log(userid);
     //delete element in table which matches id
     User.destroy({
         where:{id:userid}
